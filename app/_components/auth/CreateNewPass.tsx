@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { useContext, useState } from "react";
 import { StepContext } from "@/app/Signup/page";
 import { Jumper } from "./Jumper";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
@@ -39,6 +40,7 @@ const formSchema = z
 export const CreateNewPass = () => {
   const { setStep } = useContext(StepContext);
   const [see, setSee] = useState<boolean>(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,6 +51,7 @@ export const CreateNewPass = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    router.push("./");
   }
   return (
     <div className="w-104 flex flex-col gap-6">

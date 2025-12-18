@@ -11,7 +11,7 @@ export const Type = () => {
         return (
           <div
             key={i}
-            className="flex flex-col gap-10 items-center bg-[#404040] py-12"
+            className="flex flex-col gap-10 items-center bg-[#404040] pt-12 pb-10"
           >
             <h1 className="w-316 text-[30px] text-white font-semibold">
               {ele}

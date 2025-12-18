@@ -18,6 +18,7 @@ import { Header } from "./Header";
 import { useContext } from "react";
 import { StepContext } from "@/app/Login/page";
 import { Jumper } from "./Jumper";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   Email: z
@@ -33,6 +34,7 @@ const formSchema = z.object({
 });
 export const Login = () => {
   const { setStep } = useContext(StepContext);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +45,7 @@ export const Login = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    router.push("./");
   }
   return (
     <div className="w-104 flex flex-col gap-6">
