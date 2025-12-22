@@ -24,7 +24,22 @@ import {
 } from "@/components/ui/select";
 
 export const Cart = ({ ell }: propsType) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImageFile(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleRemove = () => {
+    setImageFile(null);
+    setPreview(null);
+  };
+
   return (
     <div className="relative ">
       <Dialog>
@@ -96,13 +111,32 @@ export const Cart = ({ ell }: propsType) => {
             </div>
             <div className="flex justify-between w-full">
               <p className="text-[#71717A] text-[12px]">Image</p>
-              <Input className="w-[60%] h-29" type="file" />
-              {
-                <img
-                  src={`.${ell.img}`}
-                  className="absolute w-[60%] h-29 right-1 rounded-md"
-                />
-              }
+              <Input
+                className="w-[60%] h-29"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                placeholder="Please choose photo"
+              />
+
+              {preview && (
+                <div className="absolute w-[55%] h-29 right-5">
+                  <img
+                    src={preview}
+                    alt="preview"
+                    className="w-full h-full object-cover rounded-md "
+                  />
+
+                  <Button
+                    size="icon"
+                    variant={"outline"}
+                    onClick={handleRemove}
+                    className="absolute top-1 right-2 rounded-full "
+                  >
+                    <X />
+                  </Button>
+                </div>
+              )}
             </div>
             <div className="w-full flex justify-between h-16 items-end">
               <Button

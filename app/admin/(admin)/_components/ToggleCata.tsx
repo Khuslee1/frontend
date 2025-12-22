@@ -1,7 +1,32 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState } from "react";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+const formSchema = z.object({
+  username: z.string(),
+});
 
 export const ToggleCata = () => {
   const [cataitem, setCataitem] = useState([
@@ -17,6 +42,17 @@ export const ToggleCata = () => {
     { name: "Desserts", state: false, quantity: 123 },
     { name: "Desserts", state: false, quantity: 123 },
   ]);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
   return (
     <div className="flex flex-col gap-4 w-full  rounded-xl p-6 bg-white">
       <h1 className="text-[20px] font-semibold">Dishes category</h1>
@@ -42,10 +78,50 @@ export const ToggleCata = () => {
             </Button>
           );
         })}
-
-        <Button size="icon" className="bg-red-500 rounded-full">
-          <Plus className="text-white" />
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button size="icon" className="bg-red-500 rounded-full">
+              <Plus className="text-white" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md gap-10" showCloseButton={false}>
+            <DialogHeader>
+              <DialogTitle>Add new category</DialogTitle>
+            </DialogHeader>
+            <DialogClose asChild>
+              <Button
+                size="icon"
+                variant={"outline"}
+                className="absolute rounded-full right-4 top-4"
+              >
+                <X />
+              </Button>
+            </DialogClose>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Category name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Type category name..." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="w-full flex justify-end">
+                  <Button type="submit">Add category</Button>
+                </div>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
