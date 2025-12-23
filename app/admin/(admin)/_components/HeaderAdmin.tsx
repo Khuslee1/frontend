@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 
 import { PanelsTopLeft, Truck } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const HeaderAdmin = () => {
-  const [neg, setNeg] = useState<string>("menu");
+  const [neg, setNeg] = useState<string>("order");
+  const router = useRouter();
   return (
     <div className="h-screen w-51.25 px-5 py-9 flex flex-col gap-10">
       <div className="flex gap-3 items-center">
@@ -22,6 +24,7 @@ export const HeaderAdmin = () => {
           className="w-full rounded-full"
           onClick={() => {
             setNeg("menu");
+            router.push("/admin/menu");
           }}
         >
           <PanelsTopLeft className="w-5.5 h-5.5" />
@@ -32,6 +35,7 @@ export const HeaderAdmin = () => {
           className="w-full rounded-full"
           onClick={() => {
             setNeg("order");
+            router.push("/admin");
           }}
         >
           <Truck className="w-5.5 h-5.5" />

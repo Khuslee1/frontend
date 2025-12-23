@@ -1,7 +1,7 @@
+"use client";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -9,173 +9,203 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  CalendarDays,
-  Check,
-  ChevronDown,
-  ChevronsDown,
-  ChevronsUpDown,
-} from "lucide-react";
+import { CalendarDays, ChevronDown, ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const information = [
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
+import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { SmallCart } from "./SmallCart";
 
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-  {
-    check: false,
-    idNumber: 1,
-    customer: "test@gmail.com",
-    food: ["lalar", "jinga"],
-    date: "2024/13/13",
-    total: "123$",
-    address:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    state: "pending",
-  },
-];
+type infoType = {
+  check: boolean;
+  idNumber: number;
+  customer: string;
+  food: string[];
+  date: string;
+  total: string;
+  address: string;
+  state: string;
+};
 
 export const TableComp = () => {
+  const [information, setInfo] = useState<infoType[]>([
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+    {
+      check: false,
+      idNumber: 1,
+      customer: "test@gmail.com",
+      food: ["lalar", "jinga"],
+      date: "2024/13/13",
+      total: "123$",
+      address:
+        "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
+      state: "pending",
+    },
+  ]);
+  const toggleCheck = (index: number, checked: boolean) => {
+    setInfo((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, check: checked } : item))
+    );
+  };
+  const updateState = (index: number, value: string) => {
+    setInfo((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, state: value } : item))
+    );
+  };
+
   return (
     <div className="w-full px-7 rounded-lg">
       <div className="w-full h-19 bg-white rounded-t-lg p-4 flex justify-between">
@@ -218,11 +248,15 @@ export const TableComp = () => {
         </TableHeader>
         <TableBody>
           {information.map((ele, i) => (
-            <TableRow key={i}>
+            <TableRow key={i} className={`${!ele.check ? "" : "bg-[#E4E4E7]"}`}>
               <TableCell className="w-12">
                 <div>
                   {" "}
-                  <Checkbox className="border-[#18181B]" />
+                  <Checkbox
+                    className="border-[#18181B]"
+                    checked={ele.check}
+                    onCheckedChange={(val) => toggleCheck(i, val === true)}
+                  />
                 </div>
               </TableCell>
               <TableCell className="w-14 text-[#18181B]">
@@ -230,12 +264,19 @@ export const TableComp = () => {
               </TableCell>
               <TableCell className="w-50">{ele.customer}</TableCell>
               <TableCell className="w-50   ">
-                <div className="justify-between items-center flex">
-                  {ele.food.length} foods
-                  <span>
-                    <ChevronDown className="w-4 h-4" />{" "}
-                  </span>
-                </div>
+                <Popover>
+                  <PopoverTrigger className="w-full">
+                    <div className="justify-between items-center flex ">
+                      {ele.food.length} foods
+                      <span>
+                        <ChevronDown className="w-4 h-4" />{" "}
+                      </span>
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <SmallCart />
+                  </PopoverContent>
+                </Popover>
               </TableCell>
               <TableCell className="w-50">{ele.date}</TableCell>
               <TableCell className="w-50">{ele.total}</TableCell>
@@ -244,11 +285,30 @@ export const TableComp = () => {
                 {ele.address}
               </TableCell>
               <TableCell className="w-50">
-                <Button variant={"outline"} className="rounded-full">
-                  {" "}
-                  {ele.state}
-                  <ChevronsUpDown />
-                </Button>
+                <Select
+                  value={ele.state}
+                  onValueChange={(val) => updateState(i, val)}
+                >
+                  <SelectTrigger
+                    className={`min-w-23.5 h-8 rounded-full text-black ${
+                      ele.state === "pending"
+                        ? "border border-red-500"
+                        : ele.state === "delivered"
+                        ? "border border-green-500"
+                        : ele.state === "cancelled"
+                        ? "border border-gray-400"
+                        : ""
+                    }`}
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="delivered">Delivered</SelectItem>
+                    <SelectItem value="cancelled">Cancelled</SelectItem>
+                  </SelectContent>
+                </Select>
               </TableCell>
             </TableRow>
           ))}

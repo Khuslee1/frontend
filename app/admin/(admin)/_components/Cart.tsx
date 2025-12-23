@@ -1,13 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
-import { Check, ChevronsUpDown, Minus, Pen, Plus, Trash } from "lucide-react";
+import { Pen, Trash } from "lucide-react";
 import { useState } from "react";
 import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,24 +21,54 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  dishName: z.string(),
+  dishCata: z.string(),
+  ingre: z.string(),
+  price: z.string(),
+  image: z,
+});
 
 export const Cart = ({ ell }: propsType) => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(`.${ell.img}`);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setImageFile(file);
     setPreview(URL.createObjectURL(file));
   };
 
   const handleRemove = () => {
-    setImageFile(null);
     setPreview(null);
   };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      dishName: ell.foodName,
+      dishCata: "light",
+      ingre: ell.overview,
+      price: ell.price,
+      image: undefined,
+    },
+  });
 
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
   return (
     <div className="relative ">
       <Dialog>
@@ -68,87 +97,149 @@ export const Cart = ({ ell }: propsType) => {
                 </Button>
               </DialogClose>
             </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[#71717A] text-[12px]">Dish name</p>
-              <Input className="w-[60%]" defaultValue={ell.foodName} />
-            </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[#71717A] text-[12px]">Dish cata</p>
-              <Select defaultValue={"light"}>
-                <SelectTrigger className="w-[60%]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">
-                    <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                      Light
-                    </p>
-                  </SelectItem>
-                  <SelectItem value="dark">
-                    <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                      Dark
-                    </p>
-                  </SelectItem>
-                  <SelectItem value="system">
-                    <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                      System
-                    </p>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[#71717A] text-[12px]">Ingredients</p>
-              <Input
-                className="w-[60%] h-20"
-                type={"text"}
-                defaultValue={ell.overview}
-              />
-            </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[#71717A] text-[12px]">Price</p>
-              <Input className="w-[60%]" defaultValue={ell.price} />
-            </div>
-            <div className="flex justify-between w-full">
-              <p className="text-[#71717A] text-[12px]">Image</p>
-              <Input
-                className="w-[60%] h-29"
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                placeholder="Please choose photo"
-              />
-
-              {preview && (
-                <div className="absolute w-[55%] h-29 right-5">
-                  <img
-                    src={preview}
-                    alt="preview"
-                    className="w-full h-full object-cover rounded-md "
-                  />
-
-                  <Button
-                    size="icon"
-                    variant={"outline"}
-                    onClick={handleRemove}
-                    className="absolute top-1 right-2 rounded-full "
-                  >
-                    <X />
-                  </Button>
-                </div>
-              )}
-            </div>
-            <div className="w-full flex justify-between h-16 items-end">
-              <Button
-                size={"icon"}
-                variant={"outline"}
-                className="border-red-500"
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
               >
-                {" "}
-                <Trash className="text-red-500" />
-              </Button>
-              <Button>Save changes</Button>
-            </div>
+                <FormField
+                  control={form.control}
+                  name="dishName"
+                  render={({ field }) => (
+                    <FormItem className="w-full flex justify-between">
+                      <FormLabel> Dish name</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-[60%]"
+                          defaultValue={ell.foodName}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="dishCata"
+                  render={({ field }) => (
+                    <FormItem className="w-full flex justify-between">
+                      <FormLabel>Dish category</FormLabel>
+                      <FormControl>
+                        <Select>
+                          <SelectTrigger className="w-[60%]">
+                            <SelectValue {...field} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="light">
+                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
+                                Light
+                              </p>
+                            </SelectItem>
+                            <SelectItem value="dark">
+                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
+                                Dark
+                              </p>
+                            </SelectItem>
+                            <SelectItem value="system">
+                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
+                                System
+                              </p>
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="ingre"
+                  render={({ field }) => (
+                    <FormItem className="w-full flex justify-between items-start">
+                      <FormLabel> Ingredients</FormLabel>
+                      <FormControl>
+                        <Input className="w-[60%] h-20" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem className="w-full flex justify-between">
+                      <FormLabel> Price</FormLabel>
+                      <FormControl>
+                        <Input className="w-[60%]" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field }) => (
+                    <FormItem className="w-full flex justify-between">
+                      <FormLabel> Image</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-[60%] h-29"
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+
+                            field.onChange(() => {
+                              URL.createObjectURL(file);
+                            });
+                            handleFileChange(e);
+                          }}
+                          placeholder="Please choose photo"
+                        />
+                      </FormControl>
+                      {preview && (
+                        <div className="absolute w-[55%] h-29 right-5">
+                          <img
+                            src={preview}
+                            alt="preview"
+                            className="w-full h-full object-cover rounded-md "
+                          />
+
+                          <Button
+                            size="icon"
+                            variant={"outline"}
+                            onClick={() => {
+                              handleRemove(), field.onChange(null);
+                            }}
+                            className="absolute top-1 right-2 rounded-full "
+                          >
+                            <X />
+                          </Button>
+                        </div>
+                      )}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="w-full flex justify-between h-16 items-end">
+                  <Button
+                    size={"icon"}
+                    type="button"
+                    variant={"outline"}
+                    className="border-red-500"
+                  >
+                    {" "}
+                    <Trash className="text-red-500" />
+                  </Button>
+                  <Button type="submit">Save changes</Button>
+                </div>
+              </form>
+            </Form>
           </DialogHeader>
         </DialogContent>
 
