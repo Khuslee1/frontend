@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
@@ -22,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   foodName: z.string(),
@@ -299,6 +301,7 @@ export const CataAdd = () => {
                   </DialogTrigger>
                   <p>Add new Dish to {ele.name}</p>
                   <DialogContent showCloseButton={false} className="w-115">
+                    <DialogTitle hidden></DialogTitle>
                     <DialogHeader className="font-semibold text-[18px]">
                       Add new Dish to Appetizers
                     </DialogHeader>
@@ -362,7 +365,7 @@ export const CataAdd = () => {
                               <FormItem>
                                 <FormLabel>Ingredients</FormLabel>
                                 <FormControl>
-                                  <Input
+                                  <Textarea
                                     placeholder="List ingredients..."
                                     className="h-22.5"
                                     {...field}

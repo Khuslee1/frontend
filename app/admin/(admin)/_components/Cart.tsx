@@ -33,6 +33,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   dishName: z.string(),
@@ -160,7 +161,7 @@ export const Cart = ({ ell }: propsType) => {
                     <FormItem className="w-full flex justify-between items-start">
                       <FormLabel> Ingredients</FormLabel>
                       <FormControl>
-                        <Input className="w-[60%] h-20" {...field} />
+                        <Textarea className="w-[60%] h-20" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

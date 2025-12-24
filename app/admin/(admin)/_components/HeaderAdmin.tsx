@@ -2,12 +2,13 @@
 import { Button } from "@/components/ui/button";
 
 import { PanelsTopLeft, Truck } from "lucide-react";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+
+import { usePathname, useRouter } from "next/navigation";
 
 export const HeaderAdmin = () => {
-  const [neg, setNeg] = useState<string>("order");
   const router = useRouter();
+  const params = usePathname();
+
   return (
     <div className="h-screen w-51.25 px-5 py-9 flex flex-col gap-10">
       <div className="flex gap-3 items-center">
@@ -20,10 +21,9 @@ export const HeaderAdmin = () => {
       <div className="w-full rounded-full flex flex-col gap-6">
         {" "}
         <Button
-          variant={neg == "menu" ? "default" : "outline"}
+          variant={params == "/admin/menu" ? "default" : "outline"}
           className="w-full rounded-full"
           onClick={() => {
-            setNeg("menu");
             router.push("/admin/menu");
           }}
         >
@@ -31,10 +31,9 @@ export const HeaderAdmin = () => {
           <p>Food menu</p>
         </Button>
         <Button
-          variant={neg == "order" ? "default" : "outline"}
+          variant={params == "/admin" ? "default" : "outline"}
           className="w-full rounded-full"
           onClick={() => {
-            setNeg("order");
             router.push("/admin");
           }}
         >

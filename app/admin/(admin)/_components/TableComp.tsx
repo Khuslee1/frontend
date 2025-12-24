@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CalendarDays, ChevronDown, ChevronsUpDown } from "lucide-react";
+import { CalendarDays, ChevronDown, ChevronsUpDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import {
@@ -25,6 +25,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { SmallCart } from "./SmallCart";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 type infoType = {
   check: boolean;
@@ -195,6 +204,7 @@ export const TableComp = () => {
       state: "pending",
     },
   ]);
+  const [state, setState] = useState<string>("pending");
   const toggleCheck = (index: number, checked: boolean) => {
     setInfo((prev) =>
       prev.map((item, i) => (i === index ? { ...item, check: checked } : item))
@@ -220,7 +230,76 @@ export const TableComp = () => {
             <CalendarDays />
             13 June 2023 - 14 July 2023
           </Button>
-          <Button className="rounded-full">Change delivery state</Button>
+          <Dialog>
+            <DialogTrigger>
+              <Button className="rounded-full">Change delivery state</Button>
+            </DialogTrigger>
+            <DialogContent className="w-fit gap-6" showCloseButton={false}>
+              <DialogHeader>
+                <div className="flex justify-between items-center pb-4">
+                  <DialogTitle>Change delivery state</DialogTitle>
+                  <DialogClose asChild>
+                    <Button
+                      size={"icon"}
+                      variant={"outline"}
+                      className="rounded-full"
+                    >
+                      <X />
+                    </Button>
+                  </DialogClose>
+                </div>
+
+                <div className="flex w-full gap-4">
+                  <Button
+                    variant={"secondary"}
+                    className={`rounded-full text-[12px] ${
+                      state == "delivered"
+                        ? "text-red-500 border border-red-500"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      setState("delivered");
+                    }}
+                  >
+                    Delivered{" "}
+                  </Button>
+                  <Button
+                    variant={"secondary"}
+                    className={`rounded-full  text-[12px] ${
+                      state == "pending"
+                        ? "text-red-500 border border-red-500"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      setState("pending");
+                    }}
+                  >
+                    Pending
+                  </Button>
+                  <Button
+                    variant={"secondary"}
+                    className={`rounded-full  text-[12px] ${
+                      state == "cancelled"
+                        ? "text-red-500 border border-red-500"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      setState("cancelled");
+                    }}
+                  >
+                    Cancelled
+                  </Button>
+                </div>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" className="w-full rounded-full">
+                    Save
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>{" "}
       <Table className="w-full bg-white text-[#71717A] rounded-lg">
