@@ -91,7 +91,7 @@ export const Cart = ({ ell }: propsType) => {
           <DialogHeader className="flex-col gap-3  ">
             <div className="w-full flex justify-between">
               <h1>Dishes info</h1>
-              <DialogClose>
+              <DialogClose asChild>
                 <Button size="icon" variant="outline" className="rounded-full">
                   {" "}
                   <X className="text-black" />
@@ -244,7 +244,7 @@ export const Cart = ({ ell }: propsType) => {
           </DialogHeader>
         </DialogContent>
 
-        <DialogTrigger>
+        <DialogTrigger asChild>
           <Button
             size="icon"
             variant={"outline"}

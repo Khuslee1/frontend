@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { foodType, orderType } from "./CartInfo";
+import { orderType } from "./CartInfo";
 import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 type objOr = {

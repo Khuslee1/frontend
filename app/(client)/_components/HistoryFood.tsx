@@ -1,6 +1,5 @@
 "use client";
 import { Map, Soup, Timer } from "lucide-react";
-import { useState } from "react";
 type hurgeltType = {
   hurgelt: boolean;
 };

@@ -7,7 +7,6 @@ import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -21,21 +20,23 @@ export const FoodCart = () => {
     <div className="relative">
       <Dialog>
         <DialogTrigger>
-          <Card className="p-4 w-99.25 h-85.5 gap-1.25">
-            <CardHeader className="p-0">
-              <img className="w-full h-52.5 rounded-xl" src="./BG.png" />
-            </CardHeader>
-            <CardFooter className="p-0 flex-col">
-              <p className="text-[#EF4444] text-[24px] font-semibold w-full flex justify-between">
-                Finger food{" "}
-                <span className="text-black text-[18px]">$12.99</span>
-              </p>
-              <p className="text-[14px] text-start">
-                Fluffy pancakes stacked with fruits, cream, syrup, and powdered
-                sugar.
-              </p>
-            </CardFooter>
-          </Card>
+          <div>
+            <Card className="p-4 w-99.25 h-85.5 gap-1.25">
+              <CardHeader className="p-0">
+                <img className="w-full h-52.5 rounded-xl" src="./BG.png" />
+              </CardHeader>
+              <CardFooter className="p-0 flex-col">
+                <p className="text-[#EF4444] text-[24px] font-semibold w-full flex justify-between">
+                  Finger food{" "}
+                  <span className="text-black text-[18px]">$12.99</span>
+                </p>
+                <p className="text-[14px] text-start">
+                  Fluffy pancakes stacked with fruits, cream, syrup, and
+                  powdered sugar.
+                </p>
+              </CardFooter>
+            </Card>
+          </div>
         </DialogTrigger>
         <DialogContent className="min-w-206.5" showCloseButton={false}>
           <DialogTitle className="hidden" />
@@ -44,7 +45,7 @@ export const FoodCart = () => {
             <div className="w-[46.7%] h-91 flex flex-col justify-between">
               <div>
                 <div className="w-full flex justify-end">
-                  <DialogClose>
+                  <DialogClose asChild>
                     <Button
                       size="icon"
                       variant="outline"

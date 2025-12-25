@@ -50,11 +50,8 @@ export const HeaderMain = () => {
         {!log ? (
           <>
             <Dialog>
-              <DialogTrigger>
-                <Button
-                  variant={"secondary"}
-                  className=" bg-white rounded-full"
-                >
+              <DialogTrigger asChild>
+                <Button className=" bg-white rounded-full">
                   <MapPin className="text-[#EF4444]" />
                   <p className="text-[#EF4444]">
                     Delivery address:{" "}
@@ -97,7 +94,7 @@ export const HeaderMain = () => {
               </DialogContent>
             </Dialog>
             <Drawer direction="right">
-              <DrawerTrigger>
+              <DrawerTrigger asChild>
                 <Button
                   size="icon"
                   variant={"secondary"}
@@ -114,7 +111,7 @@ export const HeaderMain = () => {
                       {" "}
                       Order detail
                     </p>
-                    <DrawerClose>
+                    <DrawerClose asChild>
                       <Button
                         size="icon"
                         variant="outline"
@@ -130,7 +127,7 @@ export const HeaderMain = () => {
               </DrawerContent>
             </Drawer>
             <DropdownMenu>
-              <DropdownMenuTrigger>
+              <DropdownMenuTrigger asChild>
                 <Button
                   size="icon"
                   variant={"destructive"}

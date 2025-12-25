@@ -29,7 +29,7 @@ const formSchema = z.object({
   foodName: z.string(),
   foodPrice: z.string(),
   ingre: z.string(),
-  image: z.file(),
+  image: z.string(),
 });
 export type foodInfo = {
   foodName: string;
@@ -277,7 +277,7 @@ export const CataAdd = () => {
       foodName: "",
       foodPrice: "",
       ingre: "",
-      image: undefined,
+      // image: "",
     },
   });
 
@@ -386,9 +386,11 @@ export const CataAdd = () => {
                                   <Input
                                     type="file"
                                     accept="image/*"
+                                    value={undefined}
                                     onChange={(e) => {
                                       const file = e.target.files?.[0];
-                                      field.onChange(file);
+                                      if (!file) return;
+                                      field.onChange(URL.createObjectURL(file));
                                       if (file) {
                                         setPreview(URL.createObjectURL(file));
                                       }

@@ -1,19 +1,10 @@
-import { AppWindowIcon, CodeIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FoodInfo } from "./FoodInfo";
 import { Textarea } from "@/components/ui/textarea";
-import { HistoryFood } from "./HistoryFood";
+
 import { HistoryCard } from "./HistoryCard";
 export type foodType = {
   id: number;

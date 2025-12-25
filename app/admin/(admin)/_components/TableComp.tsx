@@ -231,7 +231,7 @@ export const TableComp = () => {
             13 June 2023 - 14 July 2023
           </Button>
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <Button className="rounded-full">Change delivery state</Button>
             </DialogTrigger>
             <DialogContent className="w-fit gap-6" showCloseButton={false}>
