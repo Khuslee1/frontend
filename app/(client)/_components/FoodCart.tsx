@@ -69,7 +69,9 @@ export const FoodCart = () => {
                 <div className="flex justify-between">
                   <p className="text-4 flex flex-col">
                     Total price
-                    <span className="font-semibold text-[24px]">$12.99</span>
+                    <span className="font-semibold text-[24px]">
+                      ${12.99 * quantity}
+                    </span>
                   </p>
                   <div className="flex gap-3 items-center">
                     <Button

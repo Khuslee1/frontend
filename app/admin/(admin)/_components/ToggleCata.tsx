@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import {
   Dialog,
@@ -24,25 +24,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { dataTypeMap } from "./CataAdd";
+import { foodArr } from "./CataAdd";
 const formSchema = z.object({
   username: z.string(),
 });
-
-export const ToggleCata = () => {
-  const [cataitem, setCataitem] = useState([
-    { name: "All Dishes", state: false, quantity: 123 },
-    { name: "Appetizers", state: false, quantity: 123 },
-    { name: "Salads", state: false, quantity: 123 },
-    { name: "Pizzas", state: false, quantity: 123 },
-    { name: "Lunch favorites", state: false, quantity: 123 },
-    { name: "Main dishes", state: false, quantity: 123 },
-    { name: "Fish & Sea foods", state: false, quantity: 123 },
-    { name: "Brunch", state: false, quantity: 123 },
-    { name: "Side dish", state: false, quantity: 123 },
-    { name: "Desserts", state: false, quantity: 123 },
-    { name: "Desserts", state: false, quantity: 123 },
-  ]);
-
+export type dataTypeMapToggle = {
+  mapData: foodArr[];
+  setMap: Dispatch<SetStateAction<foodArr[]>>;
+  setAllstate: Dispatch<SetStateAction<boolean>>;
+  allState: boolean;
+};
+export const ToggleCata = ({
+  mapData,
+  setMap,
+  setAllstate,
+  allState,
+}: dataTypeMapToggle) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,23 +55,37 @@ export const ToggleCata = () => {
     <div className="flex flex-col gap-4 w-full  rounded-xl p-6 bg-white">
       <h1 className="text-[20px] font-semibold">Dishes category</h1>
       <div className="flex items-center gap-2">
-        {cataitem.map((ele, i) => {
+        <Button
+          variant="outline"
+          className={`rounded-full ${allState ? "border-red-500" : ""}`}
+          onClick={() => {
+            setAllstate(!allState);
+            setMap((prev) => prev.map((item) => ({ ...item, state: false })));
+          }}
+        >
+          All Dishes
+          <p className="flex items-center bg-black text-white rounded-full px-2  ">
+            {mapData.reduce((sum, ele) => sum + ele.food.length, 0)}
+          </p>
+        </Button>
+        {mapData.map((ele, i) => {
           return (
             <Button
               key={i}
               variant="outline"
               className={`rounded-full ${ele.state ? "border-red-500" : ""}`}
               onClick={() => {
-                setCataitem((prev) =>
+                setMap((prev) =>
                   prev.map((item, idx) =>
                     idx === i ? { ...item, state: !item.state } : item
                   )
                 );
+                setAllstate(false);
               }}
             >
               {ele.name}
-              <p className="flex items-center bg-black text-white rounded-full px-1 py-0.5">
-                {ele.quantity}
+              <p className="flex items-center bg-black text-white rounded-full px-2  ">
+                {ele.food.length}
               </p>
             </Button>
           );

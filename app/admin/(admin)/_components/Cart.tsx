@@ -40,7 +40,7 @@ const formSchema = z.object({
   dishCata: z.string(),
   ingre: z.string(),
   price: z.string(),
-  image: z,
+  image: z.any(),
 });
 
 export const Cart = ({ ell }: propsType) => {
@@ -63,7 +63,7 @@ export const Cart = ({ ell }: propsType) => {
       dishCata: "light",
       ingre: ell.overview,
       price: ell.price,
-      image: undefined,
+      image: ell.img,
     },
   });
 

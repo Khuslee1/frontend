@@ -8,7 +8,7 @@ type objOr = {
 };
 
 export const FoodInfo = ({ orderInfo }: objOr) => {
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number[]>([1, 1]);
   return orderInfo.food.map((ele, i) => {
     return (
       <div key={i} className="flex gap-2.5">
@@ -35,27 +35,31 @@ export const FoodInfo = ({ orderInfo }: objOr) => {
               <Button
                 size="icon"
                 variant={"outline"}
-                disabled={quantity == 1}
+                disabled={quantity[i] == 1}
                 className="rounded-full"
                 onClick={() => {
-                  setQuantity(quantity - 1);
+                  setQuantity((prev) =>
+                    prev.map((q, index) => (index === i ? q - 1 : q))
+                  );
                 }}
               >
                 <Minus />
               </Button>
-              <p>{quantity}</p>
+              <p>{quantity[i]}</p>
               <Button
                 size="icon"
                 variant={"outline"}
                 className="rounded-full"
                 onClick={() => {
-                  setQuantity(quantity + 1);
+                  setQuantity((prev) =>
+                    prev.map((q, index) => (index === i ? q + 1 : q))
+                  );
                 }}
               >
                 <Plus />
               </Button>
             </div>
-            <h1>{ele.price}$</h1>
+            <h1>{ele.price * quantity[i]}$</h1>
           </div>
         </div>
       </div>

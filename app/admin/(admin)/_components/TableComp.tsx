@@ -50,7 +50,7 @@ export const TableComp = () => {
   const [information, setInfo] = useState<infoType[]>([
     {
       check: false,
-      idNumber: 1,
+      idNumber: 0,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -72,7 +72,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 2,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -83,7 +83,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 3,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -94,7 +94,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 4,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -105,7 +105,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 5,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -116,7 +116,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 6,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -127,7 +127,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 7,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -138,7 +138,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 8,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -150,7 +150,7 @@ export const TableComp = () => {
 
     {
       check: false,
-      idNumber: 1,
+      idNumber: 9,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -161,7 +161,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 10,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -172,7 +172,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 11,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -183,7 +183,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 12,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -194,7 +194,7 @@ export const TableComp = () => {
     },
     {
       check: false,
-      idNumber: 1,
+      idNumber: 13,
       customer: "test@gmail.com",
       food: ["lalar", "jinga"],
       date: "2024/13/13",
@@ -204,11 +204,21 @@ export const TableComp = () => {
       state: "pending",
     },
   ]);
-  const [state, setState] = useState<string>("pending");
+  const [stateMe, setState] = useState<string>("pending");
   const toggleCheck = (index: number, checked: boolean) => {
     setInfo((prev) =>
       prev.map((item, i) => (i === index ? { ...item, check: checked } : item))
     );
+    console.log(information);
+  };
+  const changeState = (checkedArr: infoType[]) => {
+    checkedArr.map((ele) => {
+      setInfo((prev) =>
+        prev.map((item, i) =>
+          i === ele.idNumber ? { ...item, state: stateMe, check: false } : item
+        )
+      );
+    });
   };
   const updateState = (index: number, value: string) => {
     setInfo((prev) =>
@@ -232,7 +242,12 @@ export const TableComp = () => {
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="rounded-full">Change delivery state</Button>
+              <Button className="rounded-full">
+                Change delivery state{" "}
+                <p className="rounded-full bg-white text-black px-2">
+                  {information.filter((el) => el.check).length}
+                </p>
+              </Button>
             </DialogTrigger>
             <DialogContent className="w-fit gap-6" showCloseButton={false}>
               <DialogHeader>
@@ -253,7 +268,7 @@ export const TableComp = () => {
                   <Button
                     variant={"secondary"}
                     className={`rounded-full text-[12px] ${
-                      state == "delivered"
+                      stateMe == "delivered"
                         ? "text-red-500 border border-red-500"
                         : ""
                     }`}
@@ -266,7 +281,7 @@ export const TableComp = () => {
                   <Button
                     variant={"secondary"}
                     className={`rounded-full  text-[12px] ${
-                      state == "pending"
+                      stateMe == "pending"
                         ? "text-red-500 border border-red-500"
                         : ""
                     }`}
@@ -279,7 +294,7 @@ export const TableComp = () => {
                   <Button
                     variant={"secondary"}
                     className={`rounded-full  text-[12px] ${
-                      state == "cancelled"
+                      stateMe == "cancelled"
                         ? "text-red-500 border border-red-500"
                         : ""
                     }`}
@@ -293,7 +308,13 @@ export const TableComp = () => {
               </DialogHeader>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button type="button" className="w-full rounded-full">
+                  <Button
+                    type="button"
+                    className="w-full rounded-full"
+                    onClick={() => {
+                      changeState(information.filter((ele) => ele.check));
+                    }}
+                  >
                     Save
                   </Button>
                 </DialogClose>
@@ -327,14 +348,19 @@ export const TableComp = () => {
         </TableHeader>
         <TableBody>
           {information.map((ele, i) => (
-            <TableRow key={i} className={`${!ele.check ? "" : "bg-[#E4E4E7]"}`}>
+            <TableRow
+              key={ele.idNumber}
+              className={`${!ele.check ? "" : "bg-[#E4E4E7]"}`}
+            >
               <TableCell className="w-12">
                 <div>
                   {" "}
                   <Checkbox
                     className="border-[#18181B]"
                     checked={ele.check}
-                    onCheckedChange={(val) => toggleCheck(i, val === true)}
+                    onCheckedChange={(val) =>
+                      toggleCheck(ele.idNumber, val === true)
+                    }
                   />
                 </div>
               </TableCell>
