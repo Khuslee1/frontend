@@ -2,12 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { orderType } from "./CartInfo";
 import { Minus, Plus, X } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 type objOr = {
   orderInfo: orderType;
+  setDeleteid: Dispatch<SetStateAction<number>>;
 };
 
-export const FoodInfo = ({ orderInfo }: objOr) => {
+export const FoodInfo = ({ orderInfo, setDeleteid }: objOr) => {
   const [quantity, setQuantity] = useState<number[]>([1, 1, 1]);
   return orderInfo.food.map((ele, i) => {
     return (
@@ -25,6 +26,9 @@ export const FoodInfo = ({ orderInfo }: objOr) => {
               size="icon"
               className="rounded-full border-red-500"
               variant={"outline"}
+              onClick={() => {
+                setDeleteid(i);
+              }}
             >
               <X className="text-red-500" />
             </Button>

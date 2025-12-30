@@ -6,6 +6,7 @@ import { FoodInfo } from "./FoodInfo";
 import { Textarea } from "@/components/ui/textarea";
 
 import { HistoryCard } from "./HistoryCard";
+import { useEffect, useState } from "react";
 export type foodType = {
   id: number;
   type: string;
@@ -19,7 +20,8 @@ export type orderType = {
   location: string;
 };
 export const CartInfo = () => {
-  const orderInfo: orderType = {
+  const [deleteId, setDeleteid] = useState<number>(0);
+  const [orderInfo, setOrder] = useState<orderType>({
     food: [
       {
         id: 1,
@@ -185,7 +187,11 @@ export const CartInfo = () => {
       // },
     ],
     location: "mangasiin amnii zuun tald bubuchin podwol",
-  };
+  });
+  //   useEffect(()=> {
+  //     setOrder((prev)=>{...prev, orderInfo.food.filter})
+  //   },
+  // [deleteId])
   return (
     <div className="flex w-full flex-col gap-6">
       <Tabs defaultValue="cart" className=" flex flex-col gap-6">
@@ -214,7 +220,7 @@ export const CartInfo = () => {
               <div className="flex flex-col gap-5">
                 <div className="max-h-67.5 overflow-auto flex flex-col gap-5">
                   {" "}
-                  <FoodInfo orderInfo={orderInfo} />
+                  <FoodInfo orderInfo={orderInfo} setDeleteid={setDeleteid} />
                 </div>
 
                 <div className="mt-5">
@@ -238,13 +244,21 @@ export const CartInfo = () => {
             <CardContent className="grid gap-6">
               <div>
                 <p className="w-full text-4 text-[#71717A] flex justify-between mb-1">
-                  Items<span className="font-bold text-black">price$</span>
+                  Items
+                  <span className="font-bold text-black">
+                    ${orderInfo.food.reduce((sum, ele) => sum + ele.price, 0)}
+                  </span>
                 </p>
                 <p className="w-full text-4 text-[#71717A] flex justify-between mb-4">
-                  Shipping<span className="font-bold  text-black">price$</span>
+                  Shipping<span className="font-bold  text-black">{0.99}$</span>
                 </p>
                 <p className="w-full text-4 text-[#71717A] flex justify-between pt-4 border-t-2 border-dashed border-t-[71717A]">
-                  Total<span className="font-bold  text-black">price$</span>
+                  Total
+                  <span className="font-bold  text-black">
+                    $
+                    {orderInfo.food.reduce((sum, ele) => sum + ele.price, 0) +
+                      0.99}
+                  </span>
                 </p>
                 <Button className="w-full h-11 bg-red-500 text-white rounded-full mt-4">
                   Checkout
