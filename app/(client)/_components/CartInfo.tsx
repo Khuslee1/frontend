@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { HistoryCard } from "./HistoryCard";
 export type foodType = {
   id: number;
+  type: string;
   name: string;
   overview: string;
   quantity: number;
@@ -21,7 +22,8 @@ export const CartInfo = () => {
   const orderInfo: orderType = {
     food: [
       {
-        id: 12,
+        id: 1,
+        type: "Appetizers",
         name: "Sunshine Stackers",
         overview:
           "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
@@ -29,13 +31,158 @@ export const CartInfo = () => {
         price: 12.99,
       },
       {
-        id: 13,
+        id: 2,
+        name: "Sunshine Stackers",
+        type: "Appetizers",
+        overview:
+          "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+        quantity: 1,
+        price: 12.99,
+      },
+      {
+        id: 3,
+        type: "Appetizers",
         name: "Sunshine Stackers",
         overview:
           "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
         quantity: 1,
         price: 12.99,
       },
+      // {
+      //   id: 4,
+      //   name: "Sunshine Stackers",
+      //   type: "Appetizers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 5,
+      //   type: "Appetizers",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 6,
+      //   name: "Sunshine Stackers",
+      //   type: "Appetizers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 1,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 2,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 3,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 4,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 5,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 6,
+      //   type: "Salads",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 1,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 2,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 3,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 4,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 5,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
+      // {
+      //   id: 6,
+      //   type: "Lunch favorites",
+      //   name: "Sunshine Stackers",
+      //   overview:
+      //     "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+      //   quantity: 1,
+      //   price: 12.99,
+      // },
     ],
     location: "mangasiin amnii zuun tald bubuchin podwol",
   };
@@ -65,7 +212,11 @@ export const CartInfo = () => {
             </CardHeader>
             <CardContent className="grid gap-6">
               <div className="flex flex-col gap-5">
-                <FoodInfo orderInfo={orderInfo} />
+                <div className="max-h-67.5 overflow-auto flex flex-col gap-5">
+                  {" "}
+                  <FoodInfo orderInfo={orderInfo} />
+                </div>
+
                 <div className="mt-5">
                   <h1 className="text-[#71717A] text-5 font-semibold">
                     Delivary location

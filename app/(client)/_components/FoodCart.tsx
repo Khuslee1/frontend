@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Check, Minus, Plus } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { X } from "lucide-react";
 import {
   Dialog,
@@ -12,10 +12,32 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
+export type Props = {
+  ele: string;
+  num: number;
+};
+export type Propstype = {
+  ele: string;
+  num: number;
+  Carted: Props[];
+  setCarted: Dispatch<SetStateAction<Props[]>>;
+};
 
-export const FoodCart = () => {
+export const FoodCart = (props: Propstype) => {
   const [check, setCheck] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
+
+  // const checkCart = (cartData, foodId) => {
+  //   const food = cartData.map((el) => el.id == foodId);
+  //   return food.length > 0 ? true : false;
+  // };
+
+  useEffect(() => {
+    localStorage.setItem("Carted", JSON.stringify(props.Carted));
+    // const value = localStorage.getItem("Carted");
+    // setCarted(JSON.parse(value));
+  }, [props.Carted]);
+
   return (
     <div className="relative">
       <Dialog>
@@ -110,7 +132,24 @@ export const FoodCart = () => {
           check ? "bg-white" : "bg-[#18181B]"
         }`}
         onClick={() => {
-          setCheck(!check);
+          setCheck((prev) => !prev);
+
+          props.setCarted((prev) => {
+            const exists = prev.some(
+              (item) => item.num === props.num && item.ele === props.ele
+            );
+
+            if (exists) {
+              console.log("filter");
+
+              return prev.filter(
+                (item) => item.num !== props.num && item.ele !== props.ele
+              );
+            } else {
+              console.log("add", prev);
+              return [...prev, props];
+            }
+          });
         }}
       >
         {check ? (

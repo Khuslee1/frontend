@@ -8,10 +8,10 @@ type objOr = {
 };
 
 export const FoodInfo = ({ orderInfo }: objOr) => {
-  const [quantity, setQuantity] = useState<number[]>([1, 1]);
+  const [quantity, setQuantity] = useState<number[]>([1, 1, 1]);
   return orderInfo.food.map((ele, i) => {
     return (
-      <div key={i} className="flex gap-2.5">
+      <div key={i} className="flex gap-2.5 w-full">
         <img src="./BG.png" className="h-30 w-30" />
         <div className="flex flex-col justify-between h-full">
           <div className="flex">
