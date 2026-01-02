@@ -43,7 +43,7 @@ const formSchema = z.object({
   image: z.any(),
 });
 
-export const Cart = ({ ell }: propsType) => {
+export const Cart = ({ ell, mapData, ele }: propsType) => {
   const [preview, setPreview] = useState<string | null>(`.${ell.img}`);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,7 @@ export const Cart = ({ ell }: propsType) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       dishName: ell.foodName,
-      dishCata: "light",
+      dishCata: ele.name,
       ingre: ell.overview,
       price: ell.price,
       image: ell.img,
@@ -127,26 +127,23 @@ export const Cart = ({ ell }: propsType) => {
                     <FormItem className="w-full flex justify-between">
                       <FormLabel>Dish category</FormLabel>
                       <FormControl>
-                        <Select>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
                           <SelectTrigger className="w-[60%]">
                             <SelectValue {...field} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="light">
-                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                                Light
-                              </p>
-                            </SelectItem>
-                            <SelectItem value="dark">
-                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                                Dark
-                              </p>
-                            </SelectItem>
-                            <SelectItem value="system">
-                              <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
-                                System
-                              </p>
-                            </SelectItem>
+                            {mapData.map((ele) => {
+                              return (
+                                <SelectItem key={ele.id} value={`${ele.name}`}>
+                                  <p className="rounded-full bg-[#F4F4F5] text-[12px] px-2.5 py-0.5 min-w-29 text-start">
+                                    {ele.name}
+                                  </p>
+                                </SelectItem>
+                              );
+                            })}
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -248,7 +245,7 @@ export const Cart = ({ ell }: propsType) => {
           <Button
             size="icon"
             variant={"outline"}
-            className={`rounded-full absolute w-11 h-11 bottom-32 right-8 bg-white`}
+            className={`rounded-full absolute w-11 h-11 bottom-27 right-8 bg-white`}
           >
             <Pen className="text-red-500" />
           </Button>

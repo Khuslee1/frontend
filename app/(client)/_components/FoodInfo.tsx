@@ -6,9 +6,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 type objOr = {
   orderInfo: orderType;
   setDeleteid: Dispatch<SetStateAction<number>>;
+  setOrder: Dispatch<SetStateAction<orderType>>;
 };
 
-export const FoodInfo = ({ orderInfo, setDeleteid }: objOr) => {
+export const FoodInfo = ({ orderInfo, setDeleteid, setOrder }: objOr) => {
   const [quantity, setQuantity] = useState<number[]>([1, 1, 1]);
   return orderInfo.food.map((ele, i) => {
     return (
@@ -39,31 +40,43 @@ export const FoodInfo = ({ orderInfo, setDeleteid }: objOr) => {
               <Button
                 size="icon"
                 variant={"outline"}
-                disabled={quantity[i] == 1}
+                disabled={ele.quantity == 1}
                 className="rounded-full"
                 onClick={() => {
-                  setQuantity((prev) =>
-                    prev.map((q, index) => (index === i ? q - 1 : q))
-                  );
+                  // setQuantity((prev) =>
+                  //   prev.map((q, index) => (index === i ? q - 1 : q))
+                  // );
+                  setOrder((prev) => ({
+                    ...prev,
+                    food: prev.food.map((ele, index) =>
+                      index === i ? { ...ele, quantity: ele.quantity - 1 } : ele
+                    ),
+                  }));
                 }}
               >
                 <Minus />
               </Button>
-              <p>{quantity[i]}</p>
+              <p>{ele.quantity}</p>
               <Button
                 size="icon"
                 variant={"outline"}
                 className="rounded-full"
                 onClick={() => {
-                  setQuantity((prev) =>
-                    prev.map((q, index) => (index === i ? q + 1 : q))
-                  );
+                  // setQuantity((prev) =>
+                  //   prev.map((q, index) => (index === i ? q + 1 : q))
+                  // );
+                  setOrder((prev) => ({
+                    ...prev,
+                    food: prev.food.map((ele, index) =>
+                      index === i ? { ...ele, quantity: ele.quantity + 1 } : ele
+                    ),
+                  }));
                 }}
               >
                 <Plus />
               </Button>
             </div>
-            <h1>{ele.price * quantity[i]}$</h1>
+            <h1>{(ele.price * ele.quantity).toFixed(2)}$</h1>
           </div>
         </div>
       </div>

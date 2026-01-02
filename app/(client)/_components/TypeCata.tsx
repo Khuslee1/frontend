@@ -11,7 +11,7 @@ export const TypeCata = () => {
         <h1 className="w-316 text-[30px] text-white font-semibold">{cata}</h1>
         <div className="flex flex-wrap w-316 gap-9">
           {Arr.map((ele, index) => {
-            return <FoodCart key={index} />;
+            return <FoodCart key={ele} />;
           })}
         </div>
       </div>

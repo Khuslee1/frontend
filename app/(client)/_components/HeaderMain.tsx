@@ -30,11 +30,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCart } from "../context/cart-context";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export const HeaderMain = () => {
   const [log, setLog] = useState<boolean>(false);
   const router = useRouter();
+  const {
+    cartItems,
+    addToCart,
+    removeCart,
+    updateQuantity,
+    getTotalItems,
+    getTotalPrice,
+    isCartOpen,
+    setIsCartOpen,
+  } = useCart();
   return (
     <div className="w-screen h-17 bg-[#18181B] flex px-22 items-center justify-between fixed top-0 right-0 left-0 z-2">
       <div className="flex gap-3">

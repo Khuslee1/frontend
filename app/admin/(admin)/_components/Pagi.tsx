@@ -30,7 +30,7 @@ export const Pagi = () => {
   };
   const pathName = usePathname();
   return (
-    <Pagination className="justify-end w-full mr-10">
+    <Pagination className="justify-end w-full mr-10 ">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

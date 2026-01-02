@@ -12,31 +12,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useCart } from "../context/cart-context";
 export type Props = {
   ele: string;
   num: number;
 };
-export type Propstype = {
-  ele: string;
-  num: number;
-  Carted: Props[];
-  setCarted: Dispatch<SetStateAction<Props[]>>;
-};
 
-export const FoodCart = (props: Propstype) => {
+export const FoodCart = () => {
   const [check, setCheck] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
-
-  // const checkCart = (cartData, foodId) => {
-  //   const food = cartData.map((el) => el.id == foodId);
-  //   return food.length > 0 ? true : false;
-  // };
-
-  useEffect(() => {
-    localStorage.setItem("Carted", JSON.stringify(props.Carted));
-    // const value = localStorage.getItem("Carted");
-    // setCarted(JSON.parse(value));
-  }, [props.Carted]);
+  const {
+    cartItems,
+    addToCart,
+    removeCart,
+    updateQuantity,
+    getTotalItems,
+    getTotalPrice,
+    isCartOpen,
+    setIsCartOpen,
+  } = useCart();
 
   return (
     <div className="relative">
@@ -92,7 +86,7 @@ export const FoodCart = (props: Propstype) => {
                   <p className="text-4 flex flex-col">
                     Total price
                     <span className="font-semibold text-[24px]">
-                      ${12.99 * quantity}
+                      ${(12.99 * quantity).toFixed(2)}
                     </span>
                   </p>
                   <div className="flex gap-3 items-center">
@@ -134,22 +128,22 @@ export const FoodCart = (props: Propstype) => {
         onClick={() => {
           setCheck((prev) => !prev);
 
-          props.setCarted((prev) => {
-            const exists = prev.some(
-              (item) => item.num === props.num && item.ele === props.ele
-            );
+          // props.setCarted((prev) => {
+          //   const exists = prev.some(
+          //     (item) => item.num === props.num && item.ele === props.ele
+          //   );
 
-            if (exists) {
-              console.log("filter");
+          //   if (exists) {
+          //     console.log("filter");
 
-              return prev.filter(
-                (item) => item.num !== props.num && item.ele !== props.ele
-              );
-            } else {
-              console.log("add", prev);
-              return [...prev, props];
-            }
-          });
+          //     return prev.filter(
+          //       (item) => item.num !== props.num && item.ele !== props.ele
+          //     );
+          //   } else {
+          //     console.log("add", prev);
+          //     return [...prev, props];
+          //   }
+          // });
         }}
       >
         {check ? (

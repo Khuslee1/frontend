@@ -220,7 +220,11 @@ export const CartInfo = () => {
               <div className="flex flex-col gap-5">
                 <div className="max-h-67.5 overflow-auto flex flex-col gap-5">
                   {" "}
-                  <FoodInfo orderInfo={orderInfo} setDeleteid={setDeleteid} />
+                  <FoodInfo
+                    orderInfo={orderInfo}
+                    setDeleteid={setDeleteid}
+                    setOrder={setOrder}
+                  />
                 </div>
 
                 <div className="mt-5">
@@ -246,7 +250,10 @@ export const CartInfo = () => {
                 <p className="w-full text-4 text-[#71717A] flex justify-between mb-1">
                   Items
                   <span className="font-bold text-black">
-                    ${orderInfo.food.reduce((sum, ele) => sum + ele.price, 0)}
+                    $
+                    {orderInfo.food
+                      .reduce((sum, ele) => sum + ele.price * ele.quantity, 0)
+                      .toFixed(2)}
                   </span>
                 </p>
                 <p className="w-full text-4 text-[#71717A] flex justify-between mb-4">
@@ -256,8 +263,12 @@ export const CartInfo = () => {
                   Total
                   <span className="font-bold  text-black">
                     $
-                    {orderInfo.food.reduce((sum, ele) => sum + ele.price, 0) +
-                      0.99}
+                    {(
+                      orderInfo.food.reduce(
+                        (sum, ele) => sum + ele.price * ele.quantity,
+                        0
+                      ) + 0.99
+                    ).toFixed(2)}
                   </span>
                 </p>
                 <Button className="w-full h-11 bg-red-500 text-white rounded-full mt-4">

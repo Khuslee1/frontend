@@ -1,5 +1,6 @@
 import { Footer } from "./_components/Footer";
 import { HeaderMain } from "./_components/HeaderMain";
+import { CartProvider } from "./context/cart-context";
 
 export default function RootLayout({
   children,
@@ -8,9 +9,11 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <HeaderMain />
-      {children}
-      <Footer />
+      <CartProvider>
+        <HeaderMain />
+        {children}
+        <Footer />
+      </CartProvider>
     </div>
   );
 }

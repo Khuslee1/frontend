@@ -46,6 +46,8 @@ export type foodArr = {
 };
 export type propsType = {
   ell: foodInfo;
+  mapData: foodArr[];
+  ele: foodArr;
 };
 export type dataTypeMap = {
   mapData: foodArr[];
@@ -242,7 +244,7 @@ export const CataAdd = ({ mapData, setAllstate, allState }: dataTypeMap) => {
                 {ele.food.map((ell) => {
                   return (
                     <div key={ell.foodId + ele.id} className="h-60.25 w-[19%]">
-                      <Cart ell={ell} />
+                      <Cart ell={ell} mapData={mapData} ele={ele} />
                     </div>
                   );
                 })}
@@ -415,7 +417,7 @@ export const CataAdd = ({ mapData, setAllstate, allState }: dataTypeMap) => {
                 {ele.food.map((ell) => {
                   return (
                     <div key={ell.foodId + ele.id} className="h-60.25 w-[19%]">
-                      <Cart ell={ell} />
+                      <Cart ell={ell} mapData={mapData} ele={ele} />
                     </div>
                   );
                 })}

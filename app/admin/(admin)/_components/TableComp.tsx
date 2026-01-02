@@ -227,7 +227,7 @@ export const TableComp = () => {
   };
 
   return (
-    <div className="w-full px-7 rounded-lg">
+    <div className="w-full rounded-lg">
       <div className="w-full h-19 bg-white rounded-t-lg p-4 flex justify-between">
         <h1 className="text-[20px] font-bold flex flex-col">
           Orders
